@@ -1,0 +1,17 @@
+<div *ngIf="loading">
+  <p>🔄 กำลังโหลดข้อมูลสินค้า...</p>
+</div>
+
+<div *ngIf="!loading && product; else notFound" class="product-detail">
+  <h1>{{ product.name }}</h1>
+  <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
+  <p><strong>หมวดหมู่:</strong> {{ product.category }}</p>
+  <p><strong>ราคา:</strong> ฿{{ product.price }}</p>
+  <p><strong>คงเหลือ:</strong> {{ product.stock }} ชิ้น</p>
+  <p><strong>รายละเอียด:</strong> {{ product.description }}</p>
+</div>
+
+<ng-template #notFound>
+  <p>❌ ไม่พบข้อมูลสินค้านี้</p>
+</ng-template>
+
