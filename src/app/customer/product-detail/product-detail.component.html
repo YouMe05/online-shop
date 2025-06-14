@@ -9,9 +9,15 @@
   <p><strong>ราคา:</strong> ฿{{ product.price }}</p>
   <p><strong>คงเหลือ:</strong> {{ product.stock }} ชิ้น</p>
   <p><strong>รายละเอียด:</strong> {{ product.description }}</p>
+  
+  <button class="add-to-cart-btn" (click)="addToCart()">เพิ่มลงตะกร้า</button>
 </div>
+
+
 
 <ng-template #notFound>
   <p>❌ ไม่พบข้อมูลสินค้านี้</p>
 </ng-template>
 
+
+<app-cart-button></app-cart-button>

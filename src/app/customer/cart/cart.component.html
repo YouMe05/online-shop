@@ -1,1 +1,36 @@
-<p>cart works!</p>
+<h2 class="cart-title">🛒 รายการสินค้าในตะกร้า</h2>
+
+<div *ngFor="let item of cartItems" class="cart-item">
+  <div class="item-container">
+    <!-- รูปภาพสินค้า -->
+    <img [src]="item.imageUrl" [alt]="item.name" class="item-image" />
+
+    <!-- รายละเอียดสินค้า -->
+    <div class="item-details">
+      <div class="item-info">
+        <p class="item-name">{{ item.name }}</p>
+
+        <!-- ปุ่มเพิ่ม/ลดจำนวน -->
+        <div class="quantity-control">
+          <button (click)="decreaseQuantity(item)">−</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="increaseQuantity(item)">＋</button>
+        </div>
+
+        <!-- ปุ่มลบสินค้า -->
+        <button class="delete-btn" (click)="removeItem(item)">ลบสินค้า</button>
+      </div>
+
+      <div class="item-price">
+        <p>฿ {{ item.price | number:'1.2-2' }}</p>
+        <p class="item-total">รวม: ฿ {{ item.quantity * item.price | number:'1.2-2' }}</p>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+
+<div class="cart-summary">
+  <p><strong>รวมทั้งหมด:</strong> ฿ {{ getTotalPrice() | number:'1.2-2' }}</p>
+  <button class="checkout-btn" [routerLink]="['/checkout']">ดำเนินการชำระเงิน</button>
+</div>

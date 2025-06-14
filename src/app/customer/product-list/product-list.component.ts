@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Database, onValue, ref } from '@angular/fire/database';
+import { Database, onValue, ref, set } from '@angular/fire/database';
 import { RouterModule } from '@angular/router';
+import { CartButtonComponent } from '../cart-button/cart-button.component';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule, CartButtonComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
@@ -21,7 +22,8 @@ export class ProductListComponent {
     'Monitor',
     'GAMING GEAR',
     'KEYBOARD / MOUSE / PEN TABLET',
-    'SPEAKER / HEADSET'
+    'SPEAKER / HEADSET',
+    'Hardware'
   ];
 
   ngOnInit() {

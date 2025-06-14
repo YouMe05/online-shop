@@ -16,3 +16,26 @@
   border-radius: 12px;
   object-fit: contain;
 }
+
+.add-to-cart-btn {
+  background-color: #ff5722; /* สีส้มสไตล์ Shopee */
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart-btn:hover {
+  background-color: #e64a19;
+  transform: translateY(-1px);
+}
+
+.add-to-cart-btn:active {
+  background-color: #d84315;
+  transform: scale(0.98);
+}
