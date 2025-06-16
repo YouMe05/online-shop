@@ -1,36 +1,43 @@
 <div class="shop-container">
-    <!-- Sidebar หมวดหมู่ -->
-    <aside class="sidebar">
-        <h3>หมวดหมู่</h3>
-        <ul>
-            <li (click)="selectedCategory = 'all'" [class.active]="selectedCategory === 'all'">
-            แสดงทั้งหมด
-            </li>
-            <li *ngFor="let cat of categoryOptions"
-                (click)="selectedCategory = cat"
-                [class.active]="selectedCategory === cat">
-            {{ cat }}
-            </li>
-        </ul>
-    </aside>
+  <!-- Sidebar หมวดหมู่ -->
+  <aside class="sidebar">
+    <h3>หมวดหมู่</h3>
+    <ul>
+      <li (click)="selectedCategory = 'all'" [class.active]="selectedCategory === 'all'">
+        แสดงทั้งหมด
+      </li>
+      <li *ngFor="let cat of categoryOptions"
+          (click)="selectedCategory = cat"
+          [class.active]="selectedCategory === cat">
+        {{ cat }}
+      </li>
+    </ul>
+  </aside>
 
-    <div *ngIf="filteredProducts().length === 0">
-        ❌ ไม่มีสินค้าในหมวด "{{ selectedCategory }}"
+  <!-- Main Content -->
+  <section class="shop-content">
+    <!-- ช่องค้นหา -->
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchText" placeholder="🔍 ค้นหาชื่อสินค้า..." />
     </div>
 
+    <!-- ถ้าไม่มีสินค้า -->
+    <div *ngIf="filteredProducts().length === 0">
+      ❌ ไม่มีสินค้าในหมวด "{{ selectedCategory }}"
+    </div>
 
-    <!-- พื้นที่แสดงสินค้า -->
+    <!-- สินค้า -->
     <main class="product-grid">
-        <a *ngFor="let product of filteredProducts()"
-            class="product-card"
-            [routerLink]="['/product', product.id]">
-            
-            <img [src]="product.imageUrl" alt="{{ product.name }}" />
-            <h4>{{ product.name }}</h4>
-            <p>{{ product.description }}</p>
-            <div class="price">฿{{ product.price }}</div>
-        </a>
+      <a *ngFor="let product of filteredProducts()"
+         class="product-card"
+         [routerLink]="['/product', product.id]">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" />
+        <h4>{{ product.name }}</h4>
+        <p>{{ product.description }}</p>
+        <div class="price">฿{{ product.price }}</div>
+      </a>
     </main>
+  </section>
 </div>
 
 <app-cart-button></app-cart-button>

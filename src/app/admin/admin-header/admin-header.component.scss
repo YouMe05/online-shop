@@ -1,0 +1,25 @@
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff;
+  padding: 16px 24px;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.admin-nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.active-link {
+  background-color: rgba(255, 255, 255, 0.3);
+}

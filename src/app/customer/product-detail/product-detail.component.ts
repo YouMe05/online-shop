@@ -35,26 +35,6 @@ export class ProductDetailComponent {
 
   addToCart() {
     const cartRef = ref(this.db, 'cart/' + this.productId);
-    const cartCountRef = ref(this.db, 'cartcount/');
-
-    get(cartCountRef).then(snapshot =>{
-      if(snapshot.exists()){
-        const currentData = snapshot.val();
-        const updatedQuantity = currentData.quantity + 1;
-
-        update(cartCountRef, { quantity: updatedQuantity })
-        .then(() => {
-          console.log('เพิ่มจำนวนสินค้าเรียบร้อย');
-        })
-        .catch(error => {
-          console.error('เกิดข้อผิดพลาดในการอัปเดตตะกร้า:', error);
-        });
-      }else{
-        set(cartCountRef, {
-          quantity: 1
-        })
-      }
-    })
 
     get(cartRef).then(snapshot => {
       if (snapshot.exists()) {

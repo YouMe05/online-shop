@@ -1,1 +1,45 @@
-<p>checkout works!</p>
+<div class="checkout-container">
+  <!-- ฟอร์มจัดส่ง -->
+  <form [formGroup]="formCheckout" class="checkout-form">
+    <h2>📦 ข้อมูลจัดส่ง</h2>
+
+    <div class="form-group">
+      <label>ชื่อผู้รับ:</label>
+      <input type="text" formControlName="name" />
+      <div *ngIf="f['name']?.touched && f['name']?.invalid" class="error">
+        * กรุณากรอกชื่อ
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>ที่อยู่จัดส่ง:</label>
+      <textarea formControlName="address"></textarea>
+      <div *ngIf="f['address']?.touched && f['address']?.invalid" class="error">
+        * กรุณากรอกที่อยู่
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>เบอร์โทรศัพท์:</label>
+      <input type="text" formControlName="telephone" />
+      <div *ngIf="f['telephone']?.touched && f['telephone']?.invalid" class="error">
+        * กรุณากรอกเบอร์โทร 10 หลัก
+      </div>
+    </div>
+  </form>
+
+  <!-- สรุปรายการสินค้า -->
+  <div class="order-summary">
+    <h2>🛒 สรุปรายการสั่งซื้อ</h2>
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <img [src]="item.imageUrl" alt="{{ item.name }}" />
+      <div>
+        <h4>{{ item.name }}</h4>
+        <p>฿{{ item.price }} x {{ item.quantity }}</p>
+      </div>
+    </div>
+    <hr />
+    <h3>รวมทั้งหมด: ฿{{ getTotal() }}</h3>
+    <button class="btn-confirm" [disabled]="formCheckout.invalid" (click)="updateOrder()"  [routerLink]="['/product-list']">✅ ยืนยันการสั่งซื้อ</button>
+  </div>
+</div>

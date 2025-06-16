@@ -1,1 +1,39 @@
-<p>orders works!</p>
+<app-admin-header></app-admin-header>
+
+<h2>📦 รายการคำสั่งซื้อ</h2>
+
+<table class="order-table">
+  <thead>
+    <tr>
+      <th>ชื่อ</th>
+      <th>เบอร์</th>
+      <th>ที่อยู่</th>
+      <th>รายการ</th>
+      <th>รวม</th>
+      <th>สถานะ</th>
+      <th>จัดการ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.customer.name }}</td>
+      <td>{{ order.customer.telephone }}</td>
+      <td>{{ order.customer.address }}</td>
+      <td>
+        <ul>
+            <li *ngFor="let item of order.itemsArray">
+                {{ item.name }} x{{ item.quantity }}
+            </li>
+        </ul>
+      </td>
+      <td>฿{{ order.total }}</td>
+      <td>{{ order.status }}</td>
+      <td>
+        <button class="btn-check" (click)="markAsShipped(order.id)" [disabled]="order.status === 'จัดส่งแล้ว'">
+          เช็ค
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+

@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Database, onValue, ref, remove, set } from '@angular/fire/database';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AdminHeaderComponent } from '../admin-header/admin-header.component';
 
 @Component({
   selector: 'app-product-management',
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, AdminHeaderComponent],
   templateUrl: './product-management.component.html',
   styleUrl: './product-management.component.scss'
 })
@@ -124,14 +125,14 @@ export class ProductManagementComponent {
     const productRef = ref(this.db, 'products/' + updated.id);
 
     set(productRef, updated)
-      .then(() => {
-        console.log('Product updated:', updated);
-        this.getProducts();
-        this.editData = null; // ปิด modal
-      })
-      .catch((error) => {
-        console.error('Error updating product:', error);
-      });
+    .then(() => {
+      console.log('Product updated:', updated);
+      this.getProducts();
+      this.editData = null; // ปิด modal
+    })
+    .catch((error) => {
+      console.error('Error updating product:', error);
+    });
   }
 
   
