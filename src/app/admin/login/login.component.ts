@@ -20,6 +20,12 @@ export class LoginComponent {
       }
     );
 
+    const adminRef = ref(this.db, 'admin/');
+    set(adminRef, { 
+      username: 'admin',
+      password: 'admin',
+    });
+
     // const adminRef = ref(this.db, 'admin/');
     // set(adminRef, { 
     //   username: this.formLogin.get('username')?.value,
