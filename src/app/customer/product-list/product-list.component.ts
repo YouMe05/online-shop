@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProductListComponent {
   private db = inject(Database);
-  products: any;
+  products: any[] = [];
   selectedCategory: string = 'all';
   searchText: string = '';
   

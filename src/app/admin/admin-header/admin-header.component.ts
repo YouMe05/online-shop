@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-header',
@@ -9,4 +9,11 @@ import { RouterModule } from '@angular/router';
 })
 export class AdminHeaderComponent {
 
+  constructor(private router: Router) {}
+
+  logout() {
+    sessionStorage.removeItem('currentUser'); // หรือล้างทั้งหมดด้วย sessionStorage.clear();
+    this.router.navigate(['/login']);
+  }
+  
 }
