@@ -26,10 +26,28 @@ export class LoginComponent {
       password: 'admin',
     });
 
-    // const adminRef = ref(this.db, 'admin/');
-    // set(adminRef, { 
-    //   username: this.formLogin.get('username')?.value,
-    //   password: this.formLogin.get('password')?.value,
-    // });
+  }
+
+  usernamePasswordCheckMatch(): void{
+    const username = this.formLogin.get('username')?.value;
+    const password = this.formLogin.get('password')?.value;
+
+    
+  }
+
+  onSubmit(): void {
+    console.log('ข้อมูลที่กรอก:', this.formLogin);
+    console.log('ค่าของข้อมูลที่กรอก:', this.formLogin.value);
+    this.usernamePasswordCheckMatch();
+    if (this.formLogin.valid) {
+      this.formLogin.reset();
+    } else {
+      //console.log('ฟอร์มไม่ถูกต้อง');
+      this.formLogin.markAllAsTouched();
+    }
+  }
+
+  get f() {
+    return this.formLogin.controls;
   }
 }
