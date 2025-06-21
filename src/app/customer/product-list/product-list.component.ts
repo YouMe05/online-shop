@@ -41,33 +41,33 @@ export class ProductListComponent {
   }
 
   filteredProducts() {
-  const search = this.searchText.toLowerCase();
+    const search = this.searchText.toLowerCase();
 
-  if (this.selectedCategory === 'all' && !this.searchText) {
-    // ไม่กรองอะไรเลย
-    return this.products;
-  }
+    if (this.selectedCategory === 'all' && !this.searchText) {
+      // ไม่กรองอะไรเลย
+      return this.products;
+    }
 
-  if (this.selectedCategory === 'all' && this.searchText) {
-    // กรองเฉพาะชื่อ
+    if (this.selectedCategory === 'all' && this.searchText) {
+      // กรองเฉพาะชื่อ
+      return this.products.filter((p: any) =>
+        p.name.toLowerCase().includes(search)
+      );
+    }
+
+    if (this.selectedCategory !== 'all' && !this.searchText) {
+      // กรองเฉพาะหมวดหมู่
+      return this.products.filter((p: any) =>
+        p.category === this.selectedCategory
+      );
+    }
+
+    // กรองทั้งหมวดหมู่และชื่อ
     return this.products.filter((p: any) =>
+      p.category === this.selectedCategory &&
       p.name.toLowerCase().includes(search)
     );
   }
-
-  if (this.selectedCategory !== 'all' && !this.searchText) {
-    // กรองเฉพาะหมวดหมู่
-    return this.products.filter((p: any) =>
-      p.category === this.selectedCategory
-    );
-  }
-
-  // กรองทั้งหมวดหมู่และชื่อ
-  return this.products.filter((p: any) =>
-    p.category === this.selectedCategory &&
-    p.name.toLowerCase().includes(search)
-  );
-}
 
 }
  
