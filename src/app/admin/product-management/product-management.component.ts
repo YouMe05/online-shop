@@ -95,14 +95,21 @@ export class ProductManagementComponent {
   }
 
   deleteProduct(productId: string) {
+    const confirmed = window.confirm('คุณแน่ใจหรือไม่ว่าต้องการลบสินค้านี้?');
+
+    if (!confirmed) return;
+
     const productRef = ref(this.db, 'products/' + productId);
-    remove(productRef).then(() => {
-      console.log('Product deleted successfully');
-      this.getProducts(); // Refresh the product list
-    }).catch(error => {
-      console.error('Error deleting product:', error);
+    remove(productRef)
+    .then(() => {
+      console.log('ลบสินค้าเรียบร้อย');
+      this.getProducts(); // โหลดสินค้าใหม่
+    })
+    .catch(error => {
+      console.error('เกิดข้อผิดพลาดในการลบสินค้า:', error);
     });
   }
+
 
   showPreview() {
     if (this.formProductManage.invalid) {
