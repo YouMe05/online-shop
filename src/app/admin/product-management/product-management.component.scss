@@ -263,3 +263,23 @@
 .active-link {
   background-color: rgba(255, 255, 255, 0.3);
 }
+//_____________________________________________________
+
+.form-group textarea {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical; /* ให้ขยายสูงได้ */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.product-description {
+  white-space: pre-line;
+  line-height: 1.6;
+}

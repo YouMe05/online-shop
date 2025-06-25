@@ -53,10 +53,13 @@
 
             <div class="form-group">
                 <label>Description:</label>
-                <!-- <input type="text" formControlName="description"> -->
-                <textarea type="text" formControlName="description"></textarea>
+                <textarea
+                    formControlName="description"
+                    rows="5"
+                    placeholder="พิมพ์รายละเอียดสินค้า..."
+                ></textarea>
                 <div *ngIf="f['description']?.touched && f['description']?.invalid">
-                * Please enter a valid description.
+                    * Please enter a valid description.
                 </div>
             </div>
 
@@ -112,7 +115,8 @@
             <button class="preview-close" (click)="previewData = null">❌</button>
             <h2>🔎 Product Preview</h2>
             <p><strong>Name:</strong> {{ previewData.name }}</p>
-            <p><strong>Description:</strong> {{ previewData.description }}</p>
+            <p><strong>รายละเอียด:</strong></p>
+            <p class="product-description">{{ previewData.description }}</p>
             <p><strong>Price:</strong> {{ previewData.price }}</p>
             <p><strong>Stock:</strong> {{ previewData.stock }}</p>
             <p><strong>Category:</strong> {{ previewData.category }}</p>
@@ -136,9 +140,13 @@
 
             <div class="form-group">
                 <label>Description:</label>
-                <input type="text" formControlName="description">
+                <textarea
+                    formControlName="description"
+                    rows="5"
+                    placeholder="พิมพ์รายละเอียดสินค้า..."
+                ></textarea>
                 <div *ngIf="f['description']?.touched && f['description']?.invalid">
-                * Please enter a valid description.
+                    * Please enter a valid description.
                 </div>
             </div>
 

@@ -8,7 +8,8 @@
   <p><strong>หมวดหมู่:</strong> {{ product.category }}</p>
   <p><strong>ราคา:</strong> ฿{{ product.price }}</p>
   <p><strong>คงเหลือ:</strong> {{ product.stock }} ชิ้น</p>
-  <p><strong>รายละเอียด:</strong> {{ product.description }}</p>
+  <p><strong>รายละเอียด:</strong></p>
+  <p class="product-description">{{ product.description }}</p>
   
   <button class="add-to-cart-btn" (click)="addToCart()">เพิ่มลงตะกร้า</button>
 </div>
