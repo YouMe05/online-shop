@@ -40,6 +40,10 @@ export const routes: Routes = [
     {
         path: 'product/:id', // dynamic route
         loadComponent: () => import('./customer/product-detail/product-detail.component').then(m => m.ProductDetailComponent)
+    },
+    {
+        path: 'product-check',
+        loadComponent: () => import('./customer/product-check/product-check.component').then(m => m.ProductCheckComponent)
     }
 
 ];
