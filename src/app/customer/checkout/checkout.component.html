@@ -40,6 +40,17 @@
     </div>
     <hr />
     <h3>รวมทั้งหมด: ฿{{ getTotal() }}</h3>
-    <button class="btn-confirm" [disabled]="formCheckout.invalid" (click)="updateOrder()"  [routerLink]="['/product-list']">✅ ยืนยันการสั่งซื้อ</button>
+    <button class="btn-confirm" [disabled]="formCheckout.invalid" (click)="updateOrder()">✅ ยืนยันการสั่งซื้อ</button>
   </div>
+
+  <div *ngIf="latestOrderId" class="overlay">
+    <div class="modal">
+      <button class="close-btn" (click)="closeSuccessModal()">✖</button>
+      <h3>✅ สั่งซื้อสำเร็จ!</h3>
+      <p>หมายเลขคำสั่งซื้อของคุณคือ: <strong>{{ latestOrderId }}</strong></p>
+      <button (click)="copyOrderId()">📋 คัดลอกเลขคำสั่งซื้อ</button>
+    </div>
+  </div>
+
 </div>
+

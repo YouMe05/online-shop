@@ -1,1 +1,30 @@
-<p>product-check works!</p>
+<form [formGroup]="formCheckProduct" (ngSubmit)="check()" class="check-form">
+  <label for="orderID">กรอกเลขคำสั่งซื้อ:</label>
+  <input type="text" id="orderID" formControlName="orderID" />
+  <button type="submit">ค้นหา</button>
+</form>
+
+<!-- ถ้าพบคำสั่งซื้อ -->
+<div *ngIf="matchedOrder" class="order-result">
+    <h3>📦 คำสั่งซื้อ #{{ matchedOrder.id }}</h3>
+    <p><strong>ชื่อ:</strong> {{ matchedOrder.customer.name }}</p>
+    <p><strong>ที่อยู่:</strong> {{ matchedOrder.customer.address }}</p>
+    <p><strong>เบอร์:</strong> {{ matchedOrder.customer.telephone }}</p>
+    <p><strong>สถานะ:</strong> {{ matchedOrder.status }}</p>
+    <p><strong>รวม:</strong> ฿{{ matchedOrder.total }}</p>
+
+    <ul>
+        <li *ngFor="let item of matchedOrder.itemsArray" class="item-row">
+            <img [src]="item.imageUrl" alt="{{ item.name }}" class="item-img" />
+            <div>
+            {{ item.name }} x{{ item.quantity }}
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<!-- ถ้าไม่พบ -->
+<div *ngIf="notFound" class="not-found">
+  ❌ ไม่พบคำสั่งซื้อที่คุณกรอก
+</div>

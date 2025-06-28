@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { Database, get, onValue, ref, remove, set, update } from '@angular/fire/database';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -14,6 +15,8 @@ export class CheckoutComponent {
   private db = inject(Database);
   formCheckout !: FormGroup;
   cartItems: any[] = [];
+  latestOrderId: number | null = null;
+  private router = inject(Router);
 
   constructor(){
     this.formCheckout = new FormGroup(
@@ -73,6 +76,7 @@ export class CheckoutComponent {
     }
 
     const updates = [];
+    let orderId: number; // Declare orderId in the outer scope
 
     for (const item of this.cartItems) {
       const productRef = ref(this.db, 'products/' + item.id);
@@ -95,12 +99,12 @@ export class CheckoutComponent {
 
     Promise.all(updates)
       .then(() => {
-        const orderId = Date.now(); // ใช้ timestamp เป็น ID
+        orderId = Date.now(); // Assign value to outer-scoped orderId
         const orderRef = ref(this.db, 'orders/' + orderId);
 
         const orderData: {
           customer: any,
-          items: { [key: string]: { name: string, price: number, quantity: number } },
+          items: { [key: string]: { name: string, price: number, imageUrl: string, quantity: number } },
           total: number,
           createdAt: number,
           status: string
@@ -116,6 +120,7 @@ export class CheckoutComponent {
           orderData.items[item.id] = {
             name: item.name,
             price: item.price,
+            imageUrl: item.imageUrl,
             quantity: item.quantity
           };
         }
@@ -128,7 +133,7 @@ export class CheckoutComponent {
         return remove(cartRef);
       })
       .then(() => {
-        alert('สั่งซื้อสำเร็จ ✅');
+        this.latestOrderId = orderId;
         this.formCheckout.reset();
         this.cartItems = [];
       })
@@ -136,6 +141,21 @@ export class CheckoutComponent {
         console.error('❌ เกิดข้อผิดพลาด:', err);
         alert('❌ สั่งซื้อไม่สำเร็จ: ' + err.message);
       });
+  }
+
+  copyOrderId() {
+    if (this.latestOrderId) {
+      navigator.clipboard.writeText(this.latestOrderId.toString()).then(() => {
+        alert('คัดลอกเลขคำสั่งซื้อเรียบร้อยแล้ว!');
+      }).catch(() => {
+        alert('❌ คัดลอกไม่สำเร็จ');
+      });
+    }
+  }
+
+  closeSuccessModal() {
+    this.latestOrderId = null;
+    this.router.navigate(['/product-list']);
   }
 
   get f() {

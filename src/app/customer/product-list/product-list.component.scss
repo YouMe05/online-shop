@@ -115,4 +115,11 @@
   background-color: #0056b3;
 }
 
+.btn-group {
+  display: flex;
+  gap: 12px; /* เว้นช่องว่างระหว่างปุ่ม */
+  margin-left: auto; /* ดันกลุ่มปุ่มไปชิดขวา */
+}
+
 //------header------------
+
