@@ -58,6 +58,4 @@ export class ProductCheckComponent {
       this.notFound = true;
     }
   }
-
-
 }
