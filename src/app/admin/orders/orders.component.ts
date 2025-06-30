@@ -19,12 +19,12 @@ export class OrdersComponent {
       const data = snapshot.val();
 
       this.orders = data
-        ? Object.entries(data).map(([id, order]: [string, any]) => ({
-            id,
-            ...order,
-            itemsArray: Object.values(order.items) // แปลง object → array
-          }))
-        : [];
+      ? Object.entries(data).map(([id, order]: [string, any]) => ({
+          id,
+          ...order,
+          itemsArray: Object.values(order.items) // แปลง object → array
+        }))
+      : [];
     });
   }
 
