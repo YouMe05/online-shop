@@ -16,12 +16,6 @@ export const nonAuthGuard: CanActivateFn = (route, state) => {
       router.navigateByUrl('/manage-user');
       return false;
     }
-
-    //user: เข้าได้เฉพาะ /profile
-    if (role === 'user') {
-      router.navigateByUrl('/profile');
-      return false;
-    }
   }
 
   return false;
