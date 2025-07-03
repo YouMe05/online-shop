@@ -3,14 +3,11 @@ import { CanActivateFn, Router } from '@angular/router';
 
 export const nonAuthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const currentUser = sessionStorage.getItem('currentUser');
+  const role = sessionStorage.getItem('role');
   
-  if (!currentUser) {
+  if (!role) {
     return true;
   }else{
-    const role = JSON.parse(currentUser)[0].role;
-    const targetUrl = state.url;
-
     //admin: เข้าได้เฉพาะ /manage-user
     if (role === 'admin') {
       router.navigateByUrl('/manage-user');
