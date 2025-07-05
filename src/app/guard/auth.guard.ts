@@ -15,13 +15,6 @@ export const authGuard: CanActivateFn = (route, state) => {
       return false;
     }
 
-    if (targetUrl === '/profile' && role !== 'user') {
-      //ถ้าไม่ใช่ user
-      const backUrl = document.referrer || '/manage-user';
-      router.navigateByUrl(backUrl);
-      return false;
-    }
-
     // ได้รับอนุญาต
     return true;
   } else {
