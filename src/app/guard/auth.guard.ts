@@ -8,7 +8,14 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (currentUser) {
     const role = JSON.parse(currentUser)[0].role;
     const targetUrl = state.url;
-    if (targetUrl === '/manage-user' && role !== 'admin') {
+    if (targetUrl === '/product-management' && role !== 'admin') {
+      //ถ้าไม่ใช่ admin
+      const backUrl = document.referrer || '/profile'; // ถ้าไม่มี referrer ให้ fallback เป็น '/profile'
+      router.navigateByUrl(backUrl);
+      return false;
+    }
+
+    if (targetUrl === '/orders' && role !== 'admin') {
       //ถ้าไม่ใช่ admin
       const backUrl = document.referrer || '/profile'; // ถ้าไม่มี referrer ให้ fallback เป็น '/profile'
       router.navigateByUrl(backUrl);
