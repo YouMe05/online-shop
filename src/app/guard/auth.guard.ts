@@ -10,14 +10,14 @@ export const authGuard: CanActivateFn = (route, state) => {
     const targetUrl = state.url;
     if (targetUrl === '/product-management' && role !== 'admin') {
       //ถ้าไม่ใช่ admin
-      const backUrl = document.referrer || '/profile'; // ถ้าไม่มี referrer ให้ fallback เป็น '/profile'
+      const backUrl = document.referrer || '/product-list'; // ถ้าไม่มี referrer ให้ fallback เป็น '/profile'
       router.navigateByUrl(backUrl);
       return false;
     }
 
     if (targetUrl === '/orders' && role !== 'admin') {
       //ถ้าไม่ใช่ admin
-      const backUrl = document.referrer || '/profile'; // ถ้าไม่มี referrer ให้ fallback เป็น '/profile'
+      const backUrl = document.referrer || '/product-list'; // ถ้าไม่มี referrer ให้ fallback เป็น '/profile'
       router.navigateByUrl(backUrl);
       return false;
     }
