@@ -8,9 +8,9 @@ export const nonAuthGuard: CanActivateFn = (route, state) => {
   if (!role) {
     return true;
   }else{
-    //admin: เข้าได้เฉพาะ /manage-user
+    //admin: เข้าได้เฉพาะ /product-management
     if (role === 'admin') {
-      router.navigateByUrl('/manage-user');
+      router.navigateByUrl('/product-management');
       return false;
     }
   }
