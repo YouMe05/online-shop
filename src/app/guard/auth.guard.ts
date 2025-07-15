@@ -3,30 +3,40 @@ import { CanActivateFn, Router } from '@angular/router';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const currentUser = sessionStorage.getItem('currentUser');
 
-  if (currentUser) {
-    const role = JSON.parse(currentUser)[0].role;
+  try {
+    const rawUser = sessionStorage.getItem('currentUser');
+    if (!rawUser) throw new Error('No currentUser');
+
+    const parsedUser = JSON.parse(rawUser);
+    const role = parsedUser?.role ?? parsedUser?.[0]?.role;
+
+    if (!role) {
+      console.warn('No role found in currentUser');
+      router.navigate(['/product-list']);
+      return false;
+    }
+
     const targetUrl = state.url;
-    if (targetUrl === '/product-management' && role !== 'admin') {
-      //ถ้าไม่ใช่ admin
-      const backUrl = document.referrer || '/product-list'; // ถ้าไม่มี referrer ให้ fallback เป็น '/product-list'
+    const isAdmin = role === 'admin';
+
+    if (
+      ['/product-management', '/orders'].includes(targetUrl) &&
+      !isAdmin
+    ) {
+      const fallback = '/product-list';
+      const backUrl = document.referrer?.includes(window.location.origin)
+        ? document.referrer
+        : fallback;
+
       router.navigateByUrl(backUrl);
       return false;
     }
 
-    if (targetUrl === '/orders' && role !== 'admin') {
-      //ถ้าไม่ใช่ admin
-      const backUrl = document.referrer || '/product-list'; // ถ้าไม่มี referrer ให้ fallback เป็น '/product-list'
-      router.navigateByUrl(backUrl);
-      return false;
-    }
-
-    // ได้รับอนุญาต
+    //ผ่าน guard
     return true;
-  } else {
-    console.log('Not logged in. Redirecting to login page.');
-    //alert('Please log in to access this page.');
+  } catch (e) {
+    console.error('authGuard error:', e);
     router.navigate(['/product-list']);
     return false;
   }
