@@ -10,17 +10,17 @@ export const routes: Routes = [
     {
         path: 'home',
         loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-        //canActivate: [authGuard]
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'login',
         loadComponent: () => import('./admin/login/login.component').then(m => m.LoginComponent),
-        //canActivate: [nonAuthGuard]
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'orders',
         loadComponent: () => import('./admin/orders/orders.component').then(m => m.OrdersComponent),
-        //canActivate: [nonAuthGuard]
+        canActivate: [authGuard]
     },
     {
         path: 'product-management',
@@ -30,17 +30,17 @@ export const routes: Routes = [
     {
         path: 'cart',
         loadComponent: () => import('./customer/cart/cart.component').then(m => m.CartComponent),
-        //canActivate: [authGuard]
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'checkout',
         loadComponent: () => import('./customer/checkout/checkout.component').then(m => m.CheckoutComponent),
-        //canActivate: [authGuard]
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'product-detail',
         loadComponent: () => import('./customer/product-detail/product-detail.component').then(m => m.ProductDetailComponent),
-        //canActivate: [authGuard]
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'product-list',
@@ -50,12 +50,12 @@ export const routes: Routes = [
     {
         path: 'product/:id', // dynamic route
         loadComponent: () => import('./customer/product-detail/product-detail.component').then(m => m.ProductDetailComponent),
-        //canActivate: [authGuard]
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'product-check',
         loadComponent: () => import('./customer/product-check/product-check.component').then(m => m.ProductCheckComponent),
-        //canActivate: [authGuard]
+        canActivate: [nonAuthGuard]
     }
 
 ];
