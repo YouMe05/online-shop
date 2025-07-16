@@ -15,7 +15,7 @@ export const routes: Routes = [
     {
         path: 'login',
         loadComponent: () => import('./admin/login/login.component').then(m => m.LoginComponent),
-        //canActivate: [authGuard]
+        //canActivate: [nonAuthGuard]
     },
     {
         path: 'orders',
@@ -45,7 +45,7 @@ export const routes: Routes = [
     {
         path: 'product-list',
         loadComponent: () => import('./customer/product-list/product-list.component').then(m => m.ProductListComponent),
-        //canActivate: [authGuard]
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'product/:id', // dynamic route
