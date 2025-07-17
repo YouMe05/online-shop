@@ -5,12 +5,12 @@ import { authGuard } from './guard/auth.guard';
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./customer/product-list/product-list.component').then(m => m.ProductListComponent)
+        loadComponent: () => import('./customer/product-list/product-list.component').then(m => m.ProductListComponent),
+        canActivate: [nonAuthGuard]
     },
     {
         path: 'home',
-        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-        canActivate: [nonAuthGuard]
+        loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) 
     },
     {
         path: 'login',
