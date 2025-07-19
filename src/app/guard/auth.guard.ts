@@ -36,6 +36,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     //ผ่าน guard
     return true;
   } catch (e) {
+    alert("You are not Admin.Can't inter this site.");
     console.error('authGuard error:', e);
     router.navigate(['/product-list']);
     return false;
