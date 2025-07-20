@@ -10,6 +10,7 @@ export const nonAuthGuard: CanActivateFn = (route, state) => {
 
     return true;
   } catch (e) {
+    alert("You are login as Admin.Please logout before exit this site.");
     console.error('authGuard error:', e);
     router.navigate(['/product-management']);
     return false;
