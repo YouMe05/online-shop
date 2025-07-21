@@ -12,6 +12,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     const role = parsedUser?.role ?? parsedUser?.[0]?.role;
 
     if (!role) {
+      alert('No role found in currentUser');
       console.warn('No role found in currentUser');
       router.navigate(['/product-list']);
       return false;
